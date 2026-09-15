@@ -1,0 +1,26 @@
+# Voice infrastructure dependencies for Jarvis: wake/, stt/, tts/
+# Install into a venv located on drive D (per spec.md — C: has too little
+# free space for model caches / torch / CUDA libs).
+#
+# GPU note (RTX 3060, 12GB VRAM): install a CUDA-enabled torch build BEFORE
+# this file, matching the CUDA toolkit actually installed, e.g.:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121
+# Both stt/transcriber.py and tts/speaker.py detect a missing/broken CUDA at
+# runtime and fall back to CPU automatically (logged), so a CPU-only torch
+# install still works, just slower.
+#
+# wake/wakeword_listener.py uses openWakeWord (free, open-source, no access
+# key) instead of Picovoice Porcupine — Porcupine's free tier for personal
+# 24/7 use was discontinued 2026-06-30. openWakeWord downloads its pretrained
+# "hey_jarvis" model weights automatically on first run (needs internet once;
+# no account/registration). On Windows, openWakeWord only supports the
+# "onnx" inference framework (pulls in onnxruntime as a transitive
+# dependency) — wake/wakeword_listener.py is hardcoded to request "onnx".
+
+openwakeword>=0.6.0
+sounddevice>=0.4.6
+numpy>=1.24,<2.0
+faster-whisper>=1.0.0
+torch>=2.1.0
+torchaudio>=2.1.0
+PyYAML>=6.0

@@ -1,0 +1,40 @@
+# Зависимости Jarvis. Ставить в venv на диске D (на C: не хватает места под
+# torch/CUDA/кэши моделей — см. spec.md).
+#
+# ВАЖНО (версия Python): используй Python 3.11 или 3.12, НЕ самую новую
+# версию (3.13/3.14). numpy/torch/faster-whisper/openwakeword публикуют
+# готовые wheel-сборки не сразу для новых версий Python — на слишком новом
+# Python pip пытается собрать их из исходников, для чего нужен компилятор C
+# (Visual Studio Build Tools), которого обычно нет. Проверено вживую:
+# на Python 3.14 сборка numpy падает с "Unknown compiler(s)".
+#
+# ВАЖНО (GPU, RTX 3060 12GB): сначала поставь CUDA-сборку torch под
+# установленный у тебя CUDA toolkit, например:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121
+# Без этого torch поставится CPU-only и STT/TTS будут работать медленнее
+# (код сам определяет отсутствие CUDA и откатывается на CPU, не падая).
+#
+# Для быстрой проверки без тяжёлых ML-зависимостей используй
+# `python orchestrator.py --text` — этому режиму достаточно верхнего блока.
+
+# --- Ядро (brain/tools) — нужно даже для текстового режима --text ---
+requests>=2.31
+PyYAML>=6.0
+beautifulsoup4>=4.12   # опционально: web_search использует urllib-fallback без него
+
+# --- Голосовой пайплайн (wake/stt/tts) — только для полного голосового режима ---
+openwakeword>=0.6.0     # wake word "hey_jarvis" (замена Picovoice Porcupine — см. RESEARCH.md)
+sounddevice>=0.4.6
+numpy>=1.26   # без верхней границы — пусть pip сам подберёт версию под наличные wheel-сборки
+faster-whisper>=1.0.0
+torch>=2.1.0
+torchaudio>=2.1.0
+
+# --- Системная интеграция (service/) ---
+pystray>=0.19
+Pillow>=10.0
+pycaw>=20230407          # управление громкостью через set_volume; при отсутствии есть winmm-фолбэк
+keyboard>=0.13.5         # хоткей Numpad "+" как запасной способ активации без голоса (wake/hotkey_listener.py)
+
+# --- Тесты (dev) ---
+pytest>=8.0

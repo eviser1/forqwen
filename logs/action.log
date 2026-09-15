@@ -1,0 +1,311 @@
+2026-09-15 23:34:46,045 INFO jarvis.orchestrator: USER: РћС‚РєСЂРѕР№ Р±Р»РѕРєРЅРѕС‚
+2026-09-15 23:34:48,187 ERROR jarvis.brain.ollama_client: Ollama недоступна или вернула ошибку (http://localhost:11434): 404 Client Error: Not Found for url: http://localhost:11434/api/chat
+2026-09-15 23:34:48,187 INFO jarvis.orchestrator: JARVIS: Прошу прощения, служба Ollama сейчас недоступна. Проверьте, что она запущена, и повторите запрос позже.
+2026-09-15 23:35:48,043 INFO jarvis.orchestrator: USER: РћС‚РєСЂРѕР№ Р±Р»РѕРєРЅРѕС‚
+2026-09-15 23:36:50,166 ERROR jarvis.brain.ollama_client: Ollama недоступна или вернула ошибку (http://localhost:11434): HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=60.0)
+2026-09-15 23:36:50,167 INFO jarvis.orchestrator: JARVIS: Прошу прощения, служба Ollama сейчас недоступна. Проверьте, что она запущена, и повторите запрос позже.
+2026-09-15 23:36:50,167 INFO jarvis.orchestrator: USER: Р’С‹РїРѕР»РЅРё git status
+2026-09-15 23:39:34,918 INFO jarvis.orchestrator: USER: Р’С‹РїРѕР»РЅРё git status
+2026-09-15 23:40:34,487 INFO jarvis.tools.actions: Выполнена команда: git status (код возврата 128)
+2026-09-15 23:40:41,240 INFO jarvis.orchestrator: JARVIS: Репозиторий Git не найден в текущей директории или её родительских. Проверьте, находится лие в корне проекта с .git-каталогом.
+2026-09-15 23:40:58,350 INFO jarvis.orchestrator: USER: РЈРґР°Р»Рё РІСЃРµ С„Р°Р№Р»С‹ РІ СЌС‚РѕР№ РїР°РїРєРµ
+2026-09-15 23:41:05,645 INFO jarvis.orchestrator: JARVIS: Для открытия проводника с указанием пути, пожалуйста, уточните, какую именно папку вы хотите открыть. Если же требуется просто запустить проводник без конкретного пути, я могу это сделать сразу.
+2026-09-15 23:42:56,603 INFO jarvis.orchestrator: USER: Удали все файлы в этой папке
+2026-09-15 23:43:02,154 INFO jarvis.orchestrator: JARVIS: Я не могу удалить файлы, это вне моих возможностей.
+2026-09-15 23:43:28,038 INFO jarvis.orchestrator: USER: Найди в интернете курс доллара
+2026-09-15 23:43:39,229 ERROR jarvis.tools.actions: Ошибка веб-поиска по запросу 'курс доллара': ('Connection aborted.', ConnectionResetError(10054, 'Удаленный хост принудительно разорвал существующее подключение', None, 10054, None))
+2026-09-15 23:43:47,138 INFO jarvis.orchestrator: JARVIS: К сожалению, веб-поиск временно недоступен. Попробуйте позже или проверьте соединение.
+2026-09-15 23:45:02,925 INFO jarvis.orchestrator: USER: Найди в интернете курс доллара
+2026-09-15 23:45:23,564 ERROR jarvis.tools.actions: Ошибка веб-поиска по запросу 'курс доллара': HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Read timed out. (read timeout=10)
+2026-09-15 23:45:32,048 INFO jarvis.orchestrator: JARVIS: Сервис временно недоступен. Попробую открыть официальный сайт ЦБ РФ для проверки курса. Если не получится — данные будут недоступны до восстановления связи.
+2026-09-15 23:50:34,012 INFO jarvis.orchestrator: USER: привет
+2026-09-15 23:51:03,310 INFO jarvis.orchestrator: JARVIS: Добрый день. Я — Jarvis, ваш личный ассистент. Если вам нужна помощь с задачами, обращайтесь. Разговоры вроде этого — не в моих силах.
+2026-09-15 23:51:03,311 INFO jarvis.orchestrator: USER: чо как
+2026-09-15 23:51:10,400 INFO jarvis.orchestrator: JARVIS: Спрашивайте конкретнее, мистер. Я не волшебник, чтобы угадывать, что вам нужно.
+2026-09-16 00:06:28,468 INFO jarvis.tray: Трей-иконка запущена
+2026-09-16 00:06:28,469 INFO jarvis.orchestrator: Jarvis запущен и слушает фразу «Хей, Джарвис» (openWakeWord: hey_jarvis).
+2026-09-16 00:06:28,469 ERROR wake.wakeword_listener: Пакет openwakeword не установлен. Установите: pip install openwakeword
+Traceback (most recent call last):
+  File "D:\claude code prj\3\jarvis\wake\wakeword_listener.py", line 176, in run
+    import openwakeword
+ModuleNotFoundError: No module named 'openwakeword'
+2026-09-16 00:07:12,597 INFO jarvis.tray: Трей: получена команда 'Перезапустить'
+2026-09-16 00:07:12,856 INFO jarvis.tray: Трей-иконка запущена
+2026-09-16 00:07:12,856 INFO jarvis.orchestrator: Jarvis запущен и слушает фразу «Хей, Джарвис» (openWakeWord: hey_jarvis).
+2026-09-16 00:07:12,857 ERROR wake.wakeword_listener: Пакет openwakeword не установлен. Установите: pip install openwakeword
+Traceback (most recent call last):
+  File "D:\claude code prj\3\jarvis\wake\wakeword_listener.py", line 176, in run
+    import openwakeword
+ModuleNotFoundError: No module named 'openwakeword'
+2026-09-16 00:07:14,087 INFO jarvis.tray: Трей: получена команда 'Выключить'
+2026-09-16 00:07:14,087 INFO jarvis.orchestrator: Завершение работы Jarvis...
+2026-09-16 00:07:14,395 INFO jarvis.orchestrator: Завершение работы Jarvis...
+2026-09-16 00:12:10,165 INFO jarvis.tray: Трей-иконка запущена
+2026-09-16 00:12:10,166 INFO jarvis.orchestrator: Jarvis запущен и слушает фразу «Хей, Джарвис» (openWakeWord: hey_jarvis).
+2026-09-16 00:12:21,717 INFO wake.wakeword_listener: Wake word listener запущен (openWakeWord, модель='hey_jarvis', порог=0.50). Ожидаю фразу «hey jarvis»...
+2026-09-16 00:13:20,379 INFO jarvis.orchestrator: Завершение работы Jarvis...
+2026-09-16 00:13:20,526 INFO wake.wakeword_listener: Wake word listener остановлен.
+2026-09-16 00:32:51,269 INFO jarvis.tray: Трей-иконка запущена
+2026-09-16 00:32:51,269 INFO jarvis.orchestrator: Jarvis запущен, жду подтверждения от wake-listener'а...
+2026-09-16 00:32:52,733 INFO wake.wakeword_listener: Wake word listener запущен (openWakeWord, модель='hey_jarvis', порог=0.50). Ожидаю фразу «hey jarvis»...
+2026-09-16 00:32:52,734 INFO jarvis.orchestrator: Jarvis слушает — микрофон и модель wake word готовы.
+2026-09-16 00:33:43,784 INFO jarvis.tray: Трей: получена команда 'Выключить'
+2026-09-16 00:33:43,784 INFO jarvis.orchestrator: Завершение работы Jarvis...
+2026-09-16 00:33:43,885 INFO wake.wakeword_listener: Wake word listener остановлен.
+2026-09-16 00:33:44,201 INFO jarvis.orchestrator: Завершение работы Jarvis...
+2026-09-16 00:37:13,666 INFO jarvis.tray: Трей-иконка запущена
+2026-09-16 00:37:13,667 INFO jarvis.orchestrator: Jarvis запущен, жду подтверждения от wake-listener'ов...
+2026-09-16 00:37:14,046 INFO wake.hotkey_listener: Hotkey listener запущен. Нажмите 'add' (по умолчанию Numpad +), чтобы активировать Jarvis без голоса.
+2026-09-16 00:37:14,046 INFO jarvis.orchestrator: Hotkey Numpad '+' готов — можно жать вместо голоса.
+2026-09-16 00:37:15,106 INFO wake.wakeword_listener: Wake word listener запущен (openWakeWord, модель='hey_jarvis', порог=0.50). Ожидаю фразу «hey jarvis»...
+2026-09-16 00:37:15,106 INFO jarvis.orchestrator: Jarvis слушает голос — микрофон и модель wake word готовы.
+2026-09-16 00:37:16,662 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:16,895 INFO stt.transcriber: Начинаю запись речи (rms_threshold=500, silence_timeout=1.2s, max=15.0s)...
+2026-09-16 00:37:17,172 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,202 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,232 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,262 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,307 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,338 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,369 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,400 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,430 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,460 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,506 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,536 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,565 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,595 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,626 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,671 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,701 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,731 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,762 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,792 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,836 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,867 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,898 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,928 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,958 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:17,988 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:18,033 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:21,686 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:21,950 WARNING stt.transcriber: Речь не обнаружена в течение 5.0s.
+2026-09-16 00:37:23,822 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:26,621 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:37:28,335 INFO httpx: HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-09-16 00:37:28,557 INFO httpx: HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/tree/536b0662742c02347bc0e980a01041f333bce120?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-09-16 00:37:28,757 INFO httpx: HTTP Request: HEAD https://huggingface.co/Systran/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-09-16 00:37:28,757 WARNING huggingface_hub.utils._http: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-09-16 00:37:28,836 INFO httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Systran/faster-whisper-small/536b0662742c02347bc0e980a01041f333bce120/config.json?%2FSystran%2Ffaster-whisper-small%2Fresolve%2F536b0662742c02347bc0e980a01041f333bce120%2Fconfig.json=&etag=%22e5047537059bd8f182d9ca64c470201585015187%22 "HTTP/1.1 200 OK"
+2026-09-16 00:37:28,922 INFO httpx: HTTP Request: HEAD https://huggingface.co/Systran/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-09-16 00:37:28,922 INFO httpx: HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Systran/faster-whisper-small/536b0662742c02347bc0e980a01041f333bce120/config.json?%2FSystran%2Ffaster-whisper-small%2Fresolve%2F536b0662742c02347bc0e980a01041f333bce120%2Fconfig.json=&etag=%22e5047537059bd8f182d9ca64c470201585015187%22 "HTTP/1.1 200 OK"
+2026-09-16 00:37:28,935 INFO httpx: HTTP Request: HEAD https://huggingface.co/Systran/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/vocabulary.txt "HTTP/1.1 307 Temporary Redirect"
+2026-09-16 00:37:28,949 INFO httpx: HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/xet-read-token/536b0662742c02347bc0e980a01041f333bce120 "HTTP/1.1 200 OK"
+2026-09-16 00:37:29,002 INFO httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Systran/faster-whisper-small/536b0662742c02347bc0e980a01041f333bce120/tokenizer.json?%2FSystran%2Ffaster-whisper-small%2Fresolve%2F536b0662742c02347bc0e980a01041f333bce120%2Ftokenizer.json=&etag=%227818adb6de9fa3064d3ff81226fdd675be1f6344%22 "HTTP/1.1 200 OK"
+2026-09-16 00:37:29,013 INFO httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Systran/faster-whisper-small/536b0662742c02347bc0e980a01041f333bce120/vocabulary.txt?%2FSystran%2Ffaster-whisper-small%2Fresolve%2F536b0662742c02347bc0e980a01041f333bce120%2Fvocabulary.txt=&etag=%22c9074644d9d1205686f16d411564729461324b75%22 "HTTP/1.1 200 OK"
+2026-09-16 00:37:29,084 INFO httpx: HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Systran/faster-whisper-small/536b0662742c02347bc0e980a01041f333bce120/tokenizer.json?%2FSystran%2Ffaster-whisper-small%2Fresolve%2F536b0662742c02347bc0e980a01041f333bce120%2Ftokenizer.json=&etag=%227818adb6de9fa3064d3ff81226fdd675be1f6344%22 "HTTP/1.1 200 OK"
+2026-09-16 00:37:29,112 INFO httpx: HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Systran/faster-whisper-small/536b0662742c02347bc0e980a01041f333bce120/vocabulary.txt?%2FSystran%2Ffaster-whisper-small%2Fresolve%2F536b0662742c02347bc0e980a01041f333bce120%2Fvocabulary.txt=&etag=%22c9074644d9d1205686f16d411564729461324b75%22 "HTTP/1.1 200 OK"
+2026-09-16 00:37:31,430 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:38:19,164 INFO jarvis.tray: Трей: получена команда 'Выключить'
+2026-09-16 00:38:19,164 INFO jarvis.orchestrator: Завершение работы Jarvis...
+2026-09-16 00:38:19,292 INFO wake.wakeword_listener: Wake word listener остановлен.
+2026-09-16 00:38:19,293 INFO wake.hotkey_listener: Hotkey listener остановлен.
+2026-09-16 00:39:46,749 INFO jarvis.tray: Трей-иконка запущена
+2026-09-16 00:39:46,749 INFO jarvis.orchestrator: Jarvis запущен, жду подтверждения от wake-listener'ов...
+2026-09-16 00:39:46,750 ERROR wake.hotkey_listener: Пакет keyboard не установлен. Установите: pip install keyboard
+Traceback (most recent call last):
+  File "D:\claude code prj\3\jarvis\wake\hotkey_listener.py", line 118, in run
+    import keyboard  # type: ignore
+    ^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'keyboard'
+2026-09-16 00:39:49,756 ERROR jarvis.orchestrator: Hotkey listener не запустился — Numpad '+' не будет работать. Смотрите строку с ошибкой чуть выше (обычно: не установлен пакет keyboard, либо нужны права администратора для перехвата клавиатуры).
+2026-09-16 00:40:00,911 INFO jarvis.orchestrator: Завершение работы Jarvis...
+2026-09-16 00:40:16,679 INFO jarvis.tray: Трей-иконка запущена
+2026-09-16 00:40:16,680 INFO jarvis.orchestrator: Jarvis запущен, жду подтверждения от wake-listener'ов...
+2026-09-16 00:40:17,060 INFO wake.hotkey_listener: Hotkey listener запущен. Нажмите 'add' (по умолчанию Numpad +), чтобы активировать Jarvis без голоса.
+2026-09-16 00:40:17,061 INFO jarvis.orchestrator: Hotkey Numpad '+' готов — можно жать вместо голоса.
+2026-09-16 00:40:32,886 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:40:33,120 INFO stt.transcriber: Начинаю запись речи (rms_threshold=500, silence_timeout=1.2s, max=15.0s)...
+2026-09-16 00:40:38,191 WARNING stt.transcriber: Речь не обнаружена в течение 5.0s.
+2026-09-16 00:40:44,414 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:40:46,929 INFO httpx: HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-09-16 00:41:39,858 INFO jarvis.tray: Трей: получена команда 'Выключить'
+2026-09-16 00:41:39,858 INFO jarvis.orchestrator: Завершение работы Jarvis...
+2026-09-16 00:41:44,863 INFO wake.hotkey_listener: Hotkey listener остановлен.
+2026-09-16 00:48:48,627 INFO jarvis.orchestrator: Текстовый fallback-ввод активен: можно просто напечатать команду в этой консоли и нажать Enter — не обязательно говорить или жать Numpad +.
+2026-09-16 00:48:48,718 INFO jarvis.tray: Трей-иконка запущена
+2026-09-16 00:48:48,719 INFO jarvis.orchestrator: Jarvis запущен, жду подтверждения от wake-listener'ов...
+2026-09-16 00:48:49,121 INFO wake.hotkey_listener: Hotkey listener запущен. Нажмите 'add' (по умолчанию Numpad +), чтобы активировать Jarvis без голоса.
+2026-09-16 00:48:49,121 INFO jarvis.orchestrator: Hotkey Numpad '+' готов — можно жать вместо голоса.
+2026-09-16 00:48:57,165 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:48:57,477 INFO stt.transcriber: Начинаю запись речи (rms_threshold=500, silence_timeout=1.2s, max=15.0s)...
+2026-09-16 00:49:04,357 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:05,597 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:09,642 INFO httpx: HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-09-16 00:49:09,861 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:13,445 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:13,950 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:13,982 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:14,437 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:14,946 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:14,978 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,009 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,039 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,070 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,116 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,147 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,179 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,209 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,241 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,271 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,303 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:49:15,333 INFO wake.hotkey_listener: Хоткей 'add' нажат.
+2026-09-16 00:50:00,333 WARNING wake.wakeword_listener: Не удалось скачать/обновить веса модели openWakeWord 'hey_jarvis' (возможно, нет подключения к интернету при первом запуске). Если модель уже была скачана ранее, работа продолжится с локальной копией.
+Traceback (most recent call last):
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connectionpool.py", line 494, in _make_request
+    raise new_e
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connectionpool.py", line 470, in _make_request
+    self._validate_conn(conn)
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1125, in _validate_conn
+    conn.connect()
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connection.py", line 878, in connect
+    wrapped_socket, is_verified = _ssl_wrap_socket_and_match_hostname(
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connection.py", line 1080, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 437, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 481, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionAbortedError: [WinError 10053] Программа на вашем хост-компьютере разорвала установленное подключение
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\requests\adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\util\retry.py", line 510, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\util\util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connectionpool.py", line 494, in _make_request
+    raise new_e
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connectionpool.py", line 470, in _make_request
+    self._validate_conn(conn)
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1125, in _validate_conn
+    conn.connect()
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connection.py", line 878, in connect
+    wrapped_socket, is_verified = _ssl_wrap_socket_and_match_hostname(
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\connection.py", line 1080, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 437, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 481, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+urllib3.exceptions.ProtocolError: ('Connection aborted.', ConnectionAbortedError(10053, 'Программа на вашем хост-компьютере разорвала установленное подключение', None, 10053, None))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\claude code prj\3\jarvis\wake\wakeword_listener.py", line 204, in run
+    openwakeword.utils.download_models(model_names=[self._model_name])
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\utils.py", line 656, in download_models
+    download_file(vad_model["download_url"], target_directory)
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\utils.py", line 609, in download_file
+    with requests.get(url, stream=True) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\requests\api.py", line 87, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\requests\api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\requests\sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\requests\sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\requests\adapters.py", line 711, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', ConnectionAbortedError(10053, 'Программа на вашем хост-компьютере разорвала установленное подключение', None, 10053, None))
+2026-09-16 00:50:00,467 ERROR wake.wakeword_listener: Не удалось загрузить модель openWakeWord 'hey_jarvis' (framework=onnx). Убедитесь, что веса модели скачаны (нужен интернет при первом запуске — pip-пакет и сам код доступа/ключа не требуют).
+Traceback (most recent call last):
+  File "D:\claude code prj\3\jarvis\wake\wakeword_listener.py", line 216, in run
+    model = Model(
+            ^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\utils.py", line 686, in wrapped
+    return func(*args, **new_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\model.py", line 153, in __init__
+    self.models[mdl_name] = ort.InferenceSession(mdl_path, sess_options=sessionOptions,
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\onnxruntime\capi\onnxruntime_inference_collection.py", line 683, in __init__
+    self._create_inference_session(providers, provider_options, disabled_optimizers)
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\onnxruntime\capi\onnxruntime_inference_collection.py", line 778, in _create_inference_session
+    sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+onnxruntime.capi.onnxruntime_pybind11_state.NoSuchFile: [ONNXRuntimeError] : 3 : NO_SUCHFILE : Load model from D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\resources/models/hey_jarvis_v0.1.onnx failed:Load model D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\resources/models/hey_jarvis_v0.1.onnx failed. File doesn't exist
+2026-09-16 00:50:28,822 INFO jarvis.tray: Трей: получена команда 'Перезапустить'
+2026-09-16 00:50:29,192 INFO jarvis.orchestrator: Текстовый fallback-ввод активен: можно просто напечатать команду в этой консоли и нажать Enter — не обязательно говорить или жать Numpad +.
+2026-09-16 00:50:29,202 INFO jarvis.tray: Трей-иконка запущена
+2026-09-16 00:50:29,202 INFO jarvis.orchestrator: Jarvis запущен, жду подтверждения от wake-listener'ов...
+2026-09-16 00:50:29,788 INFO wake.hotkey_listener: Hotkey listener запущен. Нажмите 'add' (по умолчанию Numpad +), чтобы активировать Jarvis без голоса.
+2026-09-16 00:50:29,789 INFO jarvis.orchestrator: Hotkey Numpad '+' готов — можно жать вместо голоса.
+2026-09-16 00:50:34,293 ERROR wake.wakeword_listener: Не удалось загрузить модель openWakeWord 'hey_jarvis' (framework=onnx). Убедитесь, что веса модели скачаны (нужен интернет при первом запуске — pip-пакет и сам код доступа/ключа не требуют).
+Traceback (most recent call last):
+  File "D:\claude code prj\3\jarvis\wake\wakeword_listener.py", line 216, in run
+    model = Model(
+            ^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\utils.py", line 686, in wrapped
+    return func(*args, **new_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\model.py", line 213, in __init__
+    self.preprocessor = AudioFeatures(inference_framework=inference_framework, **kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\utils.py", line 90, in __init__
+    self.embedding_model = ort.InferenceSession(embedding_model_path, sess_options=sessionOptions,
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\onnxruntime\capi\onnxruntime_inference_collection.py", line 683, in __init__
+    self._create_inference_session(providers, provider_options, disabled_optimizers)
+  File "D:\claude code prj\3\jarvis\.venv\Lib\site-packages\onnxruntime\capi\onnxruntime_inference_collection.py", line 778, in _create_inference_session
+    sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+onnxruntime.capi.onnxruntime_pybind11_state.NoSuchFile: [ONNXRuntimeError] : 3 : NO_SUCHFILE : Load model from D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\resources\models\embedding_model.onnx failed:Load model D:\claude code prj\3\jarvis\.venv\Lib\site-packages\openwakeword\resources\models\embedding_model.onnx failed. File doesn't exist
+2026-09-16 00:51:38,066 INFO jarvis.orchestrator: Завершение работы Jarvis...
+2026-09-16 00:53:03,708 INFO jarvis.tray: Трей: получена команда 'Выключить'
+2026-09-16 00:53:03,710 INFO jarvis.orchestrator: Завершение работы Jarvis...
+2026-09-16 00:53:03,710 INFO wake.hotkey_listener: Hotkey listener остановлен.
+2026-09-16 00:53:03,937 INFO jarvis.orchestrator: Завершение работы Jarvis...

@@ -1,0 +1,98 @@
+# Конфигурация голосового ассистента Jarvis.
+# Все пути на Windows указывать с двойным обратным слэшем в YAML-строках.
+
+assistant:
+  name: "Jarvis"
+  # Включает/выключает системный промпт личности (дворецкий-стиль).
+  # При false brain/ollama_client.py должен использовать нейтральный системный промпт.
+  personality_enabled: true
+
+ollama:
+  base_url: "http://localhost:11434"
+  # По RESEARCH.md: нативная поддержка tools, лучшие бенчмарки tool-calling
+  # среди локальных моделей на 2026 год, 5.2GB — комфортно помещается в 12GB VRAM.
+  # Установить командой: ollama pull qwen3:8b
+  # Резерв, если качество русского не устроит: qwen2.5:7b-instruct
+  model: "qwen3:8b"
+  # Модель "глубокого анализа" — используется только если пользователь явно
+  # попросил об этом (см. ollama.deep_analysis_keywords).
+  deep_model: "gemma4:26b"
+  timeout_seconds: 60
+  # Ограничение на число раундов "модель -> tool_call -> модель" за один запрос,
+  # чтобы не зациклиться при некорректном поведении модели.
+  max_tool_iterations: 5
+  deep_analysis_keywords:
+    - "подумай как следует"
+    - "глубокий анализ"
+    - "подумай тщательно"
+    - "серьёзно подумай"
+    - "проанализируй глубоко"
+    - "включи глубокий анализ"
+
+tools:
+  # Разрешённые корневые директории для read_file/write_code_file/open_explorer.
+  # Любой путь, не находящийся внутри одной из этих директорий (после resolve()),
+  # отклоняется без исключения.
+  allowed_roots:
+    - "D:\\"
+  # ВНИМАНИЕ: по явному запросу пользователя — полный доступ на чтение/запись
+  # файлов ко всему диску D (не только к папке проекта). Диск C по-прежнему
+  # недоступен. Удаления файлов как функции всё ещё не существует — эта
+  # настройка расширяет read_file/write_code_file/open_explorer, не более.
+
+  # Белый список приложений для open_app: ключ — имя, как его произносит
+  # пользователь (в нижнем регистре), значение — исполняемый файл/команда.
+  # Приложений, отсутствующих в этом списке, open_app не запускает.
+  allowed_apps:
+    notepad: "notepad.exe"
+    блокнот: "notepad.exe"
+    calculator: "calc.exe"
+    калькулятор: "calc.exe"
+    explorer: "explorer.exe"
+    проводник: "explorer.exe"
+
+  web_search:
+    max_results: 3
+    timeout_seconds: 10
+
+  # ВНИМАНИЕ: список безопасных команд для run_safe_command НЕ читается
+  # отсюда — он захардкожен в tools/actions.py (SAFE_COMMANDS) намеренно,
+  # чтобы правка конфига не могла расширить набор разрешённых команд.
+
+logging:
+  action_log_path: "logs/action.log"
+  level: "INFO"
+
+# Wake word: Picovoice Porcupine отвергнут (бесплатный tier закрылся
+# 30.06.2026, см. RESEARCH.md) — используется open-source openWakeWord.
+# ВНИМАНИЕ: pretrained-модель триггерится на фразу "hey jarvis"
+# ("Хей, Джарвис"), а не на голое "Jarvis" — расхождение с исходным spec.md,
+# зафиксированное и принятое при синтезе (см. DECISIONS.md).
+wake:
+  model_name: "hey_jarvis"
+  threshold: 0.5
+  debounce_sec: 3.0
+  inference_framework: "onnx"
+  chunk_size: 1280
+
+# Запасной способ активировать Jarvis без голоса — глобальный хоткей.
+# По умолчанию Numpad "+" ("add" — имя клавиши в библиотеке keyboard).
+# Срабатывает точно так же, как голосовой wake word (включая barge-in,
+# если нажать во время озвучки ответа).
+hotkey:
+  key: "add"
+
+stt:
+  sample_rate: 16000
+  model_size: "small"
+  device: "cuda"
+  vad_rms_threshold: 500.0
+  silence_timeout_sec: 1.2
+  pre_speech_timeout_sec: 5.0
+  max_record_sec: 15.0
+
+tts:
+  model_id: "v4_ru"
+  speaker: "xenia"
+  sample_rate: 48000
+  device: "cuda"
