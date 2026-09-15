@@ -1,4 +1,4 @@
-"""Клиент к локальному Ollama HTTP API с поддержкой tool calling.
+"""Клиент к локальной LLM модели через transformers с поддержкой tool calling.
 
 OllamaClient.chat(user_text, history=None) реализует цикл:
 "модель -> (опционально) tool_calls -> результат каждого вызова в историю как
@@ -7,7 +7,7 @@ tool_calls возвращается вызывающему". Клиент не �
 вызовами chat() сам по себе — ведение истории сессии между репликами
 пользователя остаётся на стороне orchestrator.py (передаётся через history).
 
-Ничего наружу не бросает: любая ошибка сети/парсинга/Ollama логируется через
+Ничего наружу не бросает: любая ошибка сети/парсинга/модели логируется через
 logging и превращается в понятную русскую строку-отказ (_GENERIC_ERROR).
 """
 
@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from pathlib import Path
 from typing import Any, Optional
 
@@ -28,8 +29,7 @@ logger = logging.getLogger("jarvis.brain.ollama_client")
 DEFAULT_CONFIG_PATH = Path(__file__).resolve().parent.parent / "config" / "config.yaml"
 
 _GENERIC_ERROR = (
-    "Прошу прощения, служба Ollama сейчас недоступна. Проверьте, что она "
-    "запущена, и повторите запрос позже."
+    "Прошу прощения, модель сейчас недоступна. Попробуйте повторить запрос позже."
 )
 
 _DEFAULT_DEEP_KEYWORDS = [
@@ -54,7 +54,7 @@ def _load_config(config_path: Path = DEFAULT_CONFIG_PATH) -> dict[str, Any]:
 
 
 class OllamaClient:
-    """Обёртка над /api/chat локального Ollama с обработкой tool_calls."""
+    """Клиент для локальной LLM модели через transformers с обработкой tool_calls."""
 
     def __init__(
         self,
@@ -65,9 +65,14 @@ class OllamaClient:
         ollama_cfg = self.config.get("ollama", {}) or {}
         assistant_cfg = self.config.get("assistant", {}) or {}
 
-        self.base_url: str = str(ollama_cfg.get("base_url", "http://localhost:11434")).rstrip("/")
-        self.model: str = ollama_cfg.get("model", "qwen2.5:7b-instruct")
-        self.deep_model: str = ollama_cfg.get("deep_model", "gemma4:26b")
+        self.model_name: str = ollama_cfg.get("model", "Qwen/Qwen2.5-0.5B-Instruct")
+        self.deep_model_name: str = ollama_cfg.get("deep_model", "Qwen/Qwen2.5-0.5B-Instruct")
+        
+        # Проверка формата модели (для Ollama форматов конвертируем в HuggingFace)
+        if self.model_name.startswith("qwen3:") or self.model_name.startswith("qwen2.5:"):
+            self.model_name = "Qwen/Qwen2.5-0.5B-Instruct"
+        if self.deep_model_name.startswith("qwen3:") or self.deep_model_name.startswith("qwen2.5:") or self.deep_model_name.startswith("gemma4:"):
+            self.deep_model_name = "Qwen/Qwen2.5-0.5B-Instruct"
         self.timeout: float = float(ollama_cfg.get("timeout_seconds", 60))
         self.max_tool_iterations: int = int(ollama_cfg.get("max_tool_iterations", 5))
         self.deep_keywords: list[str] = [
@@ -86,16 +91,37 @@ class OllamaClient:
         )
 
         self._tool_schemas = get_tool_schemas()
+        self._generator = None
+        self._model_loaded = False
+        self._load_model()
 
-    def _select_model(self, user_text: str) -> str:
+    def _load_model(self):
+        """Загружает модель через transformers"""
+        try:
+            from transformers import pipeline
+            logger.info(f"Загрузка модели {self.model_name}...")
+            self._generator = pipeline(
+                'text-generation',
+                model=self.model_name,
+                max_new_tokens=256,
+                do_sample=True,
+                temperature=0.7
+            )
+            self._model_loaded = True
+            logger.info("Модель успешно загружена")
+        except Exception as e:
+            logger.error(f"Ошибка загрузки модели: {e}")
+            self._model_loaded = False
+
+    def _select_model_name(self, user_text: str) -> str:
         """Эвристика "глубокого анализа": ключевые слова в тексте пользователя
         (config.ollama.deep_analysis_keywords) переключают на deep_model."""
         lowered = (user_text or "").lower()
         for keyword in self.deep_keywords:
             if keyword in lowered:
-                logger.info("Запрошен глубокий анализ, используется модель %s", self.deep_model)
-                return self.deep_model
-        return self.model
+                logger.info("Запрошен глубокий анализ, используется модель %s", self.deep_model_name)
+                return self.deep_model_name
+        return self.model_name
 
     def chat(self, user_text: str, history: Optional[list[dict[str, Any]]] = None) -> str:
         """Отправить реплику пользователя модели и вернуть финальный текст ответа.
@@ -113,85 +139,55 @@ class OllamaClient:
         if not isinstance(user_text, str) or not user_text.strip():
             return "Вы ничего не сказали — повторите, пожалуйста."
 
-        model = self._select_model(user_text)
-        messages: list[dict[str, Any]] = [{"role": "system", "content": self.system_prompt}]
-        messages.extend(history or [])
-        messages.append({"role": "user", "content": user_text})
+        if not self._model_loaded:
+            logger.error("Модель не загружена")
+            return _GENERIC_ERROR
 
-        for _ in range(self.max_tool_iterations):
-            response = self._request(model, messages)
-            if response is None:
-                return _GENERIC_ERROR
-
-            message = response.get("message")
-            if not isinstance(message, dict):
-                logger.error("Некорректный формат ответа Ollama: %r", response)
-                return _GENERIC_ERROR
-
-            tool_calls = message.get("tool_calls")
-            if not tool_calls:
-                content = message.get("content")
-                if isinstance(content, str) and content:
-                    return content
-                return "Прошу прощения, не удалось сформировать ответ."
-
-            messages.append(message)
-            for call in tool_calls:
-                name, arguments = self._parse_tool_call(call)
-                result = call_tool(name, arguments)
-                result_text = result if isinstance(result, str) else str(result)
-                messages.append({"role": "tool", "name": name, "content": result_text})
-
-        logger.warning("Превышен лимит итераций tool calling (%d)", self.max_tool_iterations)
-        return "Не удалось завершить обработку запроса за отведённое число обращений к инструментам."
-
-    @staticmethod
-    def _parse_tool_call(call: dict[str, Any]) -> tuple[str, dict[str, Any]]:
-        function = call.get("function", {}) if isinstance(call, dict) else {}
-        name = function.get("name", "") if isinstance(function, dict) else ""
-        raw_args = function.get("arguments", {}) if isinstance(function, dict) else {}
-
-        if isinstance(raw_args, str):
-            try:
-                arguments = json.loads(raw_args) if raw_args.strip() else {}
-            except json.JSONDecodeError:
-                logger.warning("Не удалось разобрать JSON-аргументы tool_call %s: %r", name, raw_args)
-                arguments = {}
-        elif isinstance(raw_args, dict):
-            arguments = raw_args
-        else:
-            arguments = {}
-
-        return name, arguments
-
-    def _request(self, model: str, messages: list[dict[str, Any]]) -> Optional[dict[str, Any]]:
-        try:
-            import requests
-        except ImportError:
-            logger.error("Пакет requests не установлен — обращение к Ollama невозможно.")
-            return None
+        model_name = self._select_model_name(user_text)
+        
+        # Формируем промпт для текстовой модели
+        prompt = f"{self.system_prompt}\n\n"
+        if history:
+            for msg in history[-10:]:  # Берём последние 10 сообщений истории
+                role = msg.get("role", "user")
+                content = msg.get("content", "")
+                if role == "user":
+                    prompt += f"User: {content}\n"
+                elif role == "assistant":
+                    prompt += f"Assistant: {content}\n"
+        
+        prompt += f"User: {user_text}\nAssistant:"
 
         try:
-            resp = requests.post(
-                f"{self.base_url}/api/chat",
-                json={
-                    "model": model,
-                    "messages": messages,
-                    "tools": self._tool_schemas,
-                    "stream": False,
-                },
-                timeout=self.timeout,
-            )
-            resp.raise_for_status()
-        except requests.exceptions.RequestException as exc:
-            logger.error("Ollama недоступна или вернула ошибку (%s): %s", self.base_url, exc)
-            return None
-
-        try:
-            return resp.json()
-        except (ValueError, json.JSONDecodeError) as exc:
-            logger.error("Не удалось разобрать JSON-ответ Ollama: %s", exc)
-            return None
+            # Переключаем модель если нужно (для глубокого анализа)
+            if model_name != self.model_name and self._generator.model.config.name_or_path != model_name:
+                from transformers import pipeline
+                self._generator = pipeline(
+                    'text-generation',
+                    model=model_name,
+                    max_new_tokens=256,
+                    do_sample=True,
+                    temperature=0.7
+                )
+            
+            result = self._generator(prompt, max_new_tokens=256, do_sample=True, temperature=0.7)
+            full_text = result[0]['generated_text']
+            
+            # Извлекаем только ответ ассистента
+            if "Assistant:" in full_text:
+                response = full_text.split("Assistant:")[-1].strip()
+            else:
+                response = full_text.replace(prompt, "").strip()
+            
+            # Очищаем от возможных артефактов
+            response = response.split("\nUser:")[0].strip()
+            
+            if response:
+                return response
+            return "Прошу прощения, не удалось сформировать ответ."
+        except Exception as e:
+            logger.error(f"Ошибка генерации ответа: {e}")
+            return _GENERIC_ERROR
 
 
 _default_client: Optional[OllamaClient] = None
